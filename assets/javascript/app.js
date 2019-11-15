@@ -37,6 +37,7 @@ $("#submit-btn").on("click", function() {
         frequency: frequency
     });
 
+    document.getElementById("trainForm").reset();
 })
 
 database.ref().on("child_added", function(childSnapshot) {
