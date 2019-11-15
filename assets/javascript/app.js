@@ -48,11 +48,11 @@ database.ref().on("child_added", function(childSnapshot) {
     
     
     var timeFormat = "HH:mm";
-    var trainFormat = moment(firstTrain, timeFormat);
+    var trainFormat = moment(firstTrain, timeFormat).subtract(1, "years");
     timeDif = moment().diff(trainFormat, "minutes");
     timeRemain = timeDif % frequency;
     minutesAway = frequency - timeRemain;
-    nextArrival = moment().add(minutesAway, "minutes").format("HH:mm")
+    nextArrival = moment().add(minutesAway, "minutes").format("hh:mm A")
    
     
 
