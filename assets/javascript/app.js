@@ -21,7 +21,7 @@ var minutesAway = 0;
 var firstTrain = "";
 
 
-$("#submit-btn").on("click", function () {
+$("#submit-btn").on("click", function() {
     event.preventDefault();
 
     trainName = $("#train-name").val().trim();
@@ -39,23 +39,26 @@ $("#submit-btn").on("click", function () {
 
 })
 
-database.ref().on("child_added", function (childSnapshot) {
+database.ref().on("child_added", function(childSnapshot) {
 
-    console.log(childSnapshot.val().name);
-    var employeeName = childSnapshot.val().name;
-    var employeeRole = childSnapshot.val().role;
-    var employeeStart = childSnapshot.val().startDate;
-    var employeeRate = childSnapshot.val().monthsWorked;
-    var dateFormat = "MM/DD/YYYY";
-    var dateStart = moment(startDate, dateFormat);
-    monthsWorked = moment().diff(dateStart, "months");
-    totalBilled = (monthsWorked * monthlyRate);
-
-    console.log(monthsWorked);
+    var nameOfTrain = childSnapshot.val().trainName;
+    var trainDestination = childSnapshot.val().destination;
+    var firstTrainTime = childSnapshot.val().firstTrain;
+    var trainFrequency = childSnapshot.val().frequency;
+    
+    
+    var timeFormat = "HH:mm";
+    var firstTrainFormat = moment(firstTrain, timeFormat);
+    // minutesAway = moment().diff(firstTrainFormat, "minutes");
+    
+    nextArrival = "17:30";
+    minFormat = "mm";
+    minutesAway = moment(nextArrival, minFormat).fromNow();
+    
 
     var newRow = $("<tr>");
-    newRow.append("<td>" + name + "</td>" + "<td>" + role + "</td>" + "<td>" + startDate + "</td>" + "<td>" + monthsWorked + "</td>" + "<td>" + monthlyRate + "</td>" + "<td>" + totalBilled + "</td>");
+    newRow.append("<td>" + trainName + "</td>" + "<td>" + destination + "</td>" + "<td>" + frequency + "</td>" + "<td>" + nextArrival + "</td>" + "<td>" + minutesAway + "</td>");
     $(".table").append(newRow);
 
-    // "<td>Mark</td>"
+   
 });
