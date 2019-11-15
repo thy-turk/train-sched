@@ -41,19 +41,19 @@ $("#submit-btn").on("click", function() {
 
 database.ref().on("child_added", function(childSnapshot) {
 
-    var nameOfTrain = childSnapshot.val().trainName;
-    var trainDestination = childSnapshot.val().destination;
-    var firstTrainTime = childSnapshot.val().firstTrain;
-    var trainFrequency = childSnapshot.val().frequency;
+    var trainName = childSnapshot.val().trainName;
+    var destination = childSnapshot.val().destination;
+    var firstTrain = childSnapshot.val().firstTrain;
+    var frequency = childSnapshot.val().frequency;
     
     
     var timeFormat = "HH:mm";
-    var firstTrainFormat = moment(firstTrain, timeFormat);
-    // minutesAway = moment().diff(firstTrainFormat, "minutes");
-    
-    nextArrival = "17:30";
-    minFormat = "mm";
-    minutesAway = moment(nextArrival, minFormat).fromNow();
+    var trainFormat = moment(firstTrain, timeFormat);
+    timeDif = moment().diff(trainFormat, "minutes");
+    timeRemain = timeDif % frequency;
+    minutesAway = frequency - timeRemain;
+    nextArrival = moment().add(minutesAway, "minutes").format("HH:mm")
+   
     
 
     var newRow = $("<tr>");
