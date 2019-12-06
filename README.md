@@ -19,3 +19,6 @@ https://thy-turk.github.io/train-sched/
 * AJAX
 * Bootstrap 
 * Firebase
+
+## Problems Faced
+I had a difficult time working with moment.js. I worked through this by looking through the documentation and looking at examples online.
